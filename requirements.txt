@@ -1,0 +1,13 @@
+pandas
+numpy
+streamlit
+mplsoccer
+matplotlib
+pillow
+urllib3
+pickle
+collections
+datetime
+mplcyberpunk
+adjustText
+scikit-learn
