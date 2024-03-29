@@ -55,7 +55,7 @@ def df_inc_all(df, player, position):
              .reset_index()
 
     df2['Pass Completion Rate'] = df2['Passes Completed'] / df2['Passes Attempted']
-    df2['Position'] = 'Center Mid'
+    df2['Position'] = position
     order = list(df2.columns[:2]) + [df2.columns[28]] + list(df2.columns[2:6]) + [df2.columns[27]] + list(df2.columns[6:27])
 
     df2 = df2[order]
