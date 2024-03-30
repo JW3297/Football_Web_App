@@ -2,11 +2,9 @@ import pandas as pd
 import numpy as np
 import io
 
-# Plotters
-import matplotlib.pyplot as plt
-import matplotlib.colors as mcolors
-from mplsoccer import PyPizza
-import matplotlib as mpl
+# ML
+from sklearn import preprocessing
+from sklearn.decomposition import PCA
 
 # Dashboard
 import streamlit as st
@@ -59,6 +57,30 @@ def data_prep_allMins(df, player, position):
 
         
     return df_pos
+
+
+def playerSimilaritySearch(df, name):
+    df_info, df_metrics = df.iloc[:, :4], df.iloc[:, 4:]
+    cols = df_metrics.columns.tolist()
+
+    vals = df_metrics.values
+    scaler = preprocessing.MinMaxScaler()
+    vals_scaled = scaler.fit_transform(vals)
+    vals_norm = pd.DataFrame(vals_scaled, columns=cols)
+    
+    pca_2d = PCA(n_components = 2)
+    df_reduced = pd.DataFrame(pca_2d.fit_transform(vals_norm), columns=['x', 'y'])
+    df = pd.concat([df_info, df_reduced], axis=1)
+
+    x,y = df[df['playerName'] == name]['x'].tolist()[0], df[df['playerName'] == name]['y'].tolist()[0]
+
+    df['Difference Score'] = round(np.sqrt((x - df['x'])**2 + (y - df['y'])**2), 3)
+    df = df.sort_values(by='Difference Score').reset_index(drop=True)[['playerName', 'Mins', 'Difference Score']]
+    df.columns = ['Player', 'Minutes', 'Difference Score']
+
+    return df.head(11)
+
+
 st.title('Player Profiles')
 
 st.divider()
@@ -99,6 +121,9 @@ if all_mins:
 else:
     df = data_prep_allMins(df, player, position)
 
-
+df_similar = playerSimilaritySearch(df)
 
 generate = st.button('Create Plot')
+
+if generate:
+    st.dataframe(df_similar)
