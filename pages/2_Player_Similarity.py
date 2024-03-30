@@ -89,8 +89,7 @@ st.markdown(
 """
 - Only includes PL Teams for the 23/24 season as of the minute.
 - Data as of Gameweek 27.
-- Only includes players who have played more than 100 minutes in the respective position. 
-- Goalkeepers not included. 
+- PCA is used to identify similar players using a range of calculated metrics. 
 """
 )
 
@@ -116,14 +115,15 @@ position = st.selectbox(
 all_mins = st.checkbox('To include all minutes at above positions')
 
 if all_mins:
-    df = data_prep_posMins(df, position)
+    df = data_prep_allMins(df, player, position)
 
 else:
-    df = data_prep_allMins(df, player, position)
+    df = data_prep_posMins(df, position)
+
 
 df_similar = playerSimilaritySearch(df, player)
 
-generate = st.button('Create Plot')
+generate = st.button('Search')
 
 if generate:
     st.dataframe(df_similar)
