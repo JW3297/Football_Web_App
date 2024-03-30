@@ -78,7 +78,7 @@ def playerSimilaritySearch(df, name):
     df = df.sort_values(by='Difference Score').reset_index(drop=True)[['playerName', 'Mins', 'Difference Score']]
     df.columns = ['Player', 'Minutes', 'Difference Score']
 
-    return df.head(11)
+    return df.head(10)
 
 
 st.title('Player Profiles')
