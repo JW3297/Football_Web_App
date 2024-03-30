@@ -5,3 +5,4 @@ mplsoccer
 matplotlib
 pillow
 urllib3
+scikit-learn
