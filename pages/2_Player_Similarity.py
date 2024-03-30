@@ -81,7 +81,7 @@ def playerSimilaritySearch(df, name):
     return df.head(10)
 
 
-st.title('Player Profiles')
+st.title('Player Similarity Search')
 
 st.divider()
 
