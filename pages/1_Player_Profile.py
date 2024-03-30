@@ -333,6 +333,8 @@ st.divider()
 
 st.markdown(
 """
+- Only includes PL Teams for the 23/24 season as of the minute.
+- Data as of Gameweek 27.
 - Only includes players who have played more than 100 minutes in the respective position. 
 - Goalkeepers not included. 
 """
