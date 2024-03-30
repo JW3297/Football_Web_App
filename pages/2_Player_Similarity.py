@@ -121,7 +121,7 @@ if all_mins:
 else:
     df = data_prep_allMins(df, player, position)
 
-df_similar = playerSimilaritySearch(df)
+df_similar = playerSimilaritySearch(df, player)
 
 generate = st.button('Create Plot')
 
