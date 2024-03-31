@@ -82,7 +82,6 @@ def data_prep_allMins(df, player, position):
         
     return df_pos, df_ranks
 
-@st.experimental_memo
 def playerSimilaritySearch(df, name):
     df_info, df_metrics = df.iloc[:, :4], df.iloc[:, 4:]
     cols = df_metrics.columns.tolist()
@@ -353,7 +352,12 @@ df_similar = playerSimilaritySearch(df_pos1, player1)
 
 generate = st.button('Search')
 
-if generate:
+if "generate_state" not in st.session_state:
+    st.session_state.generate_state = False
+
+if generate or st.session_state.generate_state:
+
+    st.session_state.generate_state = True
 
     st.dataframe(df_similar)
 
