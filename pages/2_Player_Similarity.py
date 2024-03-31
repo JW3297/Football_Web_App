@@ -82,7 +82,7 @@ def data_prep_allMins(df, player, position):
         
     return df_pos, df_ranks
 
-
+@st.experimental_memo
 def playerSimilaritySearch(df, name):
     df_info, df_metrics = df.iloc[:, :4], df.iloc[:, 4:]
     cols = df_metrics.columns.tolist()
@@ -104,7 +104,6 @@ def playerSimilaritySearch(df, name):
 
     return df.head(10)
 
-@st.experimental_memo
 def df_player(df_pos, df_ranks, name):
     df_player_rank = df_ranks[df_ranks['playerName'] == name].reset_index(drop=True)
     df_player_vals = df_pos[df_pos['playerName'] == name].reset_index(drop=True)
