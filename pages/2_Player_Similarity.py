@@ -360,30 +360,30 @@ if generate:
 
     player_compare = df_similar[df_similar['Player'] != player1]['Player'].unique().tolist()
 
-    player2 = st.selectbox(
-        'Player To Compare', 
-        player_compare
-    )
+player2 = st.selectbox(
+    'Player To Compare', 
+    player_compare
+)
 
-    df_pos2, df_ranks2 = data_prep_posMins(df, position)
-    df_rank2, df_vals2, mins2 = df_player(df_pos2, df_ranks2, player2) 
+df_pos2, df_ranks2 = data_prep_posMins(df, position)
+df_rank2, df_vals2, mins2 = df_player(df_pos2, df_ranks2, player2) 
 
-    plot = st.button('Plot Comparison')
+plot = st.button('Plot Comparison')
 
-    if plot:
+if plot:
 
-        fig = plotter(df_rank1, df_vals1, player1, position, mins1,
-                      df_rank2, df_vals2, player2, mins2) 
-        
-        st.write(fig)
+    fig = plotter(df_rank1, df_vals1, player1, position, mins1,
+                    df_rank2, df_vals2, player2, mins2) 
+    
+    st.write(fig)
 
-        b = io.BytesIO()
-        fig.savefig(b, format='png', bbox_inches="tight")
+    b = io.BytesIO()
+    fig.savefig(b, format='png', bbox_inches="tight")
 
-        btn = st.download_button(
-            label="Download Plot",
-            data=b,
-            file_name= player1.replace(' ', '') + "vs" + player2.replace(' ', '') + "Plot.png",
-            mime="image/png"
+    btn = st.download_button(
+        label="Download Plot",
+        data=b,
+        file_name= player1.replace(' ', '') + "vs" + player2.replace(' ', '') + "Plot.png",
+        mime="image/png"
             )
 
