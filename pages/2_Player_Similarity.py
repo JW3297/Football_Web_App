@@ -287,16 +287,18 @@ def plotter(df_player_rank1, df_player_vals1, name1, pos, mins1,
 
     title1_text = axs['title'].text(0.02, 0.85, name1.upper(), fontsize=25, fontname = 'Sans Serif',
                                 ha='left', va='center', color='white')
-    title1_text = axs['title'].text(0.02, 0.6, str(mins1) + ' MINS', fontsize=17, fontname = 'Sans Serif',
+    title2_text = axs['title'].text(0.02, 0.6, str(mins1) + ' MINS', fontsize=17, fontname = 'Sans Serif',
                                 ha='left', va='center', color='white')
     title3_text = axs['title'].text(0.98, 0.85, name2.upper(), fontsize=25, fontname = 'Sans Serif',
                                     ha='right', va='center', color='white')
     title4_text = axs['title'].text(0.98, 0.6, str(mins2) + ' MINS', fontsize=17, fontname = 'Sans Serif',
                                     ha='right', va='center', color='white')
+    title5_text = axs['title'].text(0.02, 0.2, 'TEMPLATE: ' + position, fontsize=17, fontname = 'Sans Serif',
+                                    ha='left', va='center', color='white')
     axs['title'].axhline(y = 0.4, xmin = 0.02, xmax = 0.5, color='#1A78CF', lw=3) 
     axs['title'].axhline(y = 0.4, xmin = 0.5, xmax = 0.98, color='#D70232', lw=3) 
 
-    endnote_text = axs['endnote'].text(0.8, 0.5, 'TEMPLATE: ' + position + '\n\nCREATED BY @JoeW_32', fontsize=12,
+    endnote_text = axs['endnote'].text(0.8, 0.5, 'CREATED BY @JoeW_32', fontsize=15,
                                        fontname = 'Sans Serif', ha='left', va='center', color='white')
 
     fig.set_facecolor('#2B2B2B')
