@@ -101,6 +101,18 @@ def playerSimilaritySearch(df, name):
     return df.head(10)
 
 
+def df_player(df_pos, df_ranks, name):
+    df_player_rank = df_ranks[df_ranks['playerName'] == name].reset_index(drop=True)
+    df_player_vals = df_pos[df_pos['playerName'] == name].reset_index(drop=True)
+    
+    df_player_vals['Pass Completion Rate'] *= 100
+    mins = df_player_rank['Mins'][0]
+    
+    return df_player_rank, df_player_vals, mins
+
+
+
+
 st.title('Player Similarity Search')
 
 st.divider()
@@ -120,12 +132,12 @@ df = df[(df['Mins'] >= 100) &
 
 players = sorted(list(set(df['playerName'])))
 
-player = st.selectbox(
+player1 = st.selectbox(
     'Player Name', 
     players
 )
 
-positions = list(df[df['playerName'] == player]['Position'])
+positions = list(df[df['playerName'] == player1]['Position'])
 
 position = st.selectbox(
     'Position', 
@@ -135,22 +147,29 @@ position = st.selectbox(
 all_mins = st.checkbox('To include all minutes at above positions')
 
 if all_mins:
-    df_pos, df_ranks = data_prep_allMins(df, player, position)
+    df_pos1, df_ranks1 = data_prep_allMins(df, player1, position)
 
 else:
-    df_pos, df_ranks = data_prep_posMins(df, position)
+    df_pos1, df_ranks1 = data_prep_posMins(df, position)
+
+df_rank1, df_vals1, mins1 = df_player(df_pos1, df_ranks1, player1)
 
 
-df_similar = playerSimilaritySearch(df_pos, player)
+df_similar = playerSimilaritySearch(df_pos1, player1)
 
 generate = st.button('Search')
 
 if generate:
     st.dataframe(df_similar)
 
-    player_compare = df_similar[df_similar['Player'] != player]['Player'].unique().tolist()
+    player_compare = df_similar[df_similar['Player'] != player1]['Player'].unique().tolist()
 
-    to_compare = st.selectbox(
-        'Player', 
+    player2 = st.selectbox(
+        'Player To Compare', 
         player_compare
     )
+
+    df_pos2, df_ranks2 = data_prep_posMins(df, position)
+    df_rank2, df_vals2, mins2 = df_player(df_pos2, df_ranks2, player2)  
+
+    
