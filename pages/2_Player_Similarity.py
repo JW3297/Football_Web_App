@@ -117,7 +117,7 @@ def plotter(df_player_rank1, df_player_vals1, name1, pos, mins1,
     
     if pos == 'Center Mid':
         cols = [
-                'Passes Attempted', 'Pass Completion Rate', 'Forward \nPasses','Long Passes', 'Progressive Passes',
+                'Passes Attempted', 'Pass Completion Rate', 'Forward Passes','Long Passes', 'Progressive Passes',
                 'npxG', 'xA', 'Shots',
                 'Tackles', 'Interceptions', 'Fouls','Aerials',
                 'Touches', 'xT Received','Progressive Carries'
@@ -159,7 +159,7 @@ def plotter(df_player_rank1, df_player_vals1, name1, pos, mins1,
         
     elif pos == 'Full Back':
         cols = [
-                'Pass Completion Rate', 'Forward \nPasses','Progressive Passes',
+                'Pass Completion Rate', 'Forward Passes','Progressive Passes',
                 'npxG', 'xA',
                 'Tackles', 'Interceptions', 'Fouls', 'Aerials', 'Recoveries',
                 'Touches', 'Final 1/3 Touches', 'Progressive Carries', 'Successful Take Ons'
