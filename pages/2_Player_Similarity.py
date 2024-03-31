@@ -20,8 +20,18 @@ def data_prep_posMins(df, position):
             continue 
 
         df_pos[col] = df_pos[col]/col_90s
+
+    df_ranks = df_pos.copy()
+
+    for col in df_ranks.iloc[:, 4:]:
+        if col == 'Fouls':
+            df_ranks[col] = df_ranks[col].rank(ascending=False)
+        else:
+            df_ranks[col] = df_ranks[col].rank(ascending=True)
+
+        df_ranks[col] = df_ranks[col]/len(df_ranks)
         
-    return df_pos
+    return df_pos, df_ranks
 
 
 def data_prep_allMins(df, player, position):
@@ -55,8 +65,18 @@ def data_prep_allMins(df, player, position):
 
         df_pos[col] = df_pos[col]/col_90s
 
+    df_ranks = df_pos.copy()
+
+    for col in df_ranks.iloc[:, 4:]:
+        if col == 'Fouls':
+            df_ranks[col] = df_ranks[col].rank(ascending=False)
+        else:
+            df_ranks[col] = df_ranks[col].rank(ascending=True)
+
+        df_ranks[col] = df_ranks[col]/len(df_ranks)
+
         
-    return df_pos
+    return df_pos, df_ranks
 
 
 def playerSimilaritySearch(df, name):
@@ -115,13 +135,13 @@ position = st.selectbox(
 all_mins = st.checkbox('To include all minutes at above positions')
 
 if all_mins:
-    df = data_prep_allMins(df, player, position)
+    df_pos, df_ranks = data_prep_allMins(df, player, position)
 
 else:
-    df = data_prep_posMins(df, position)
+    df_pos, df_ranks = data_prep_posMins(df, position)
 
 
-df_similar = playerSimilaritySearch(df, player)
+df_similar = playerSimilaritySearch(df_pos, player)
 
 generate = st.button('Search')
 
