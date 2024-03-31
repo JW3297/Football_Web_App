@@ -104,7 +104,7 @@ def playerSimilaritySearch(df, name):
 
     return df.head(10)
 
-
+@st.experimental_memo
 def df_player(df_pos, df_ranks, name):
     df_player_rank = df_ranks[df_ranks['playerName'] == name].reset_index(drop=True)
     df_player_vals = df_pos[df_pos['playerName'] == name].reset_index(drop=True)
@@ -114,7 +114,6 @@ def df_player(df_pos, df_ranks, name):
     
     return df_player_rank, df_player_vals, mins
 
-@st.experimental_memo
 def plotter(df_player_rank1, df_player_vals1, name1, pos, mins1,
             df_player_rank2, df_player_vals2, name2, mins2):
     
