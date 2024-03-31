@@ -128,7 +128,7 @@ def plotter(df_player_rank1, df_player_vals1, name1, pos, mins1,
         df_player_vals2 = df_player_vals2[cols]
         
         fields = [
-                'Passes \nAttempted', 'Pass \nCompletion Rate', 'Forward \nPasses', 'Long \nPasses', 'Progressive \nPasses',
+                'Passes \nAttempted', 'Pass \nCompletion Rate', 'Forward   \nPasses', 'Long \nPasses', 'Progressive \nPasses',
                 'npxG', 'xA', 'Shots',
                 'Tackles', 'Interceptions', 'Fouls','Aerials',
                 'Touches', 'xT Received','Progressive \nCarries'
