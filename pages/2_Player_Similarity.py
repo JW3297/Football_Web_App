@@ -262,7 +262,7 @@ def plotter(df_player_rank1, df_player_vals1, name1, pos, mins1,
 
     rot = 360
     for i in range(len(vertices1)):
-        rot = 360-((360/len(cols))*i)
+        rot = 360-((360/len(fields))*i)
         if rot in range(90, 270):
             rot = rot - 180 
 
@@ -275,7 +275,7 @@ def plotter(df_player_rank1, df_player_vals1, name1, pos, mins1,
 
     rot = 360
     for i in range(len(vertices2)):
-        rot = 360-((360/len(cols))*i)
+        rot = 360-((360/len(fields))*i)
         if rot in range(90, 270):
             rot = rot - 180 
 
