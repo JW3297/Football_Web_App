@@ -268,7 +268,7 @@ def plotter(df_player_rank1, df_player_vals1, name1, pos, mins1,
 
         x,y = vertices1[i]
         val = values2[i]
-        axs['radar'].annotate(xy = (x,y), s = val, rotation=rot,
+        axs['radar'].annotate(xy = (x,y), text = val, rotation=rot,
                               bbox=dict(facecolor= '#1A78CF', edgecolor='white', boxstyle='round', alpha=1), 
                               color='white', fontname = 'Sans Serif', fontsize = 12)
 
@@ -281,7 +281,7 @@ def plotter(df_player_rank1, df_player_vals1, name1, pos, mins1,
 
         x,y = vertices2[i]
         val = values4[i]
-        axs['radar'].annotate(xy = (x,y), s = val, rotation=rot,
+        axs['radar'].annotate(xy = (x,y), text = val, rotation=rot,
                               bbox=dict(facecolor= '#D70232', edgecolor='white', boxstyle='round', alpha=1), 
                               color='white', fontname = 'Sans Serif', fontsize = 12)
 
