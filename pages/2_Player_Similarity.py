@@ -149,7 +149,7 @@ def plotter(df_player_rank1, df_player_vals1, name1, pos, mins1,
         
         
         fields = [
-                'Pass \nCompletion Rate', 'Forward \nPasses','Progressive \nPasses','Box \nPasses',
+                'Pass \nCompletion Rate', 'Forward   \nPasses','Progressive \nPasses','Box \nPasses',
                 'npxG', 'xA', 'Shots',
                 'Tackles', 'Fouls', 'Recoveries',
                 'Box \nTouches', 'Final 1/3 \nTouches', 'xT Received','Progressive \nCarries', 'Successful \nTake Ons'
@@ -172,7 +172,7 @@ def plotter(df_player_rank1, df_player_vals1, name1, pos, mins1,
         
         
         fields = [
-                'Pass \nCompletion Rate', 'Forward \nPasses','Progressive \nPasses',
+                'Pass \nCompletion Rate', 'Forward   \nPasses','Progressive \nPasses',
                 'npxG', 'xA',
                 'Tackles', 'Interceptions', 'Fouls', 'Aerials', 'Recoveries',
                 'Touches', 'Final 1/3 \nTouches', 'Progressive \nCarries', 'Successful \nTake Ons'
