@@ -147,3 +147,10 @@ generate = st.button('Search')
 
 if generate:
     st.dataframe(df_similar)
+
+    player_compare = df_similar[df_similar['Player'] != player]['Player'].unique().tolist()
+
+    to_compare = st.selectbox(
+        'Player', 
+        player_compare
+    )
