@@ -270,7 +270,7 @@ def plotter(df_player_rank1, df_player_vals1, name1, pos, mins1,
         val = values2[i]
         axs['radar'].annotate(xy = (x,y), text = val, rotation=rot,
                               bbox=dict(facecolor= '#1A78CF', edgecolor='white', boxstyle='round', alpha=1), 
-                              color='white', fontname = 'Sans Serif', fontsize = 12)
+                              color='white', fontname = 'Sans Serif', fontsize = 15)
 
 
     rot = 360
@@ -283,7 +283,7 @@ def plotter(df_player_rank1, df_player_vals1, name1, pos, mins1,
         val = values4[i]
         axs['radar'].annotate(xy = (x,y), text = val, rotation=rot,
                               bbox=dict(facecolor= '#D70232', edgecolor='white', boxstyle='round', alpha=1), 
-                              color='white', fontname = 'Sans Serif', fontsize = 12)
+                              color='white', fontname = 'Sans Serif', fontsize = 15)
 
     title1_text = axs['title'].text(0.02, 0.85, name1.upper(), fontsize=25, fontname = 'Sans Serif',
                                 ha='left', va='center', color='white')
