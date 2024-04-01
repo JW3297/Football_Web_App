@@ -375,3 +375,4 @@ if plot:
         data=b,
         file_name= player1.replace(' ', '') + "vs" + player2.replace(' ', '') + "Plot.png",
         mime="image/png"
+    )
