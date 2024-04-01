@@ -296,8 +296,8 @@ def plotter(df_player_rank1, df_player_vals1, name1, pos, mins1,
                                     ha='right', va='center', color='white')
     title5_text = axs['title'].text(0.02, 0.2, 'TEMPLATE: ' + pos, fontsize=17, fontname = 'Sans Serif',
                                     ha='left', va='center', color='white')
-    axs['title'].axhline(y = 0.4, xmin = 0.02, xmax = 0.5, color='#1A78CF', lw=3) 
-    axs['title'].axhline(y = 0.4, xmin = 0.5, xmax = 0.98, color='#D70232', lw=3) 
+    axs['title'].axhline(y = 0.4, xmin = 0.02, xmax = 0.5, color=color1, lw=3) 
+    axs['title'].axhline(y = 0.4, xmin = 0.5, xmax = 0.98, color=color2, lw=3) 
 
     endnote_text = axs['endnote'].text(0.8, 0.5, 'CREATED BY @JoeW_32', fontsize=15,
                                        fontname = 'Sans Serif', ha='left', va='center', color='white')
