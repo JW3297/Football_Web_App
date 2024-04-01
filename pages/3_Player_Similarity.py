@@ -113,7 +113,8 @@ def df_player(df_pos, df_ranks, name):
     return df_player_rank, df_player_vals, mins
 
 def plotter(df_player_rank1, df_player_vals1, name1, pos, mins1,
-            df_player_rank2, df_player_vals2, name2, mins2):
+            df_player_rank2, df_player_vals2, name2, mins2,
+            color1, color2):
     
     if pos == 'Center Mid':
         cols = [
