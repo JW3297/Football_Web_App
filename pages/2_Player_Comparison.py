@@ -113,7 +113,8 @@ def df_player(df_pos, df_ranks, name):
     return df_player_rank, df_player_vals, mins
 
 def plotter(df_player_rank1, df_player_vals1, name1, pos, mins1,
-            df_player_rank2, df_player_vals2, name2, mins2):
+            df_player_rank2, df_player_vals2, name2, mins2,
+            color1, color2):
     
     if pos == 'Center Mid':
         cols = [
@@ -253,8 +254,8 @@ def plotter(df_player_rank1, df_player_vals1, name1, pos, mins1,
     rings_inner = radar.draw_circles(ax=axs['radar'], facecolor='#2B2B2B', edgecolor='white', alpha=0.4, lw=1.5)
 
     radar_output = radar.draw_radar_compare(values, values3,  ax=axs['radar'],
-                                            kwargs_radar={'facecolor': '#1A78CF', 'alpha':0.55},
-                                            kwargs_compare={'facecolor': '#D70232', 'alpha': 0.6})
+                                            kwargs_radar={'facecolor': color1, 'alpha':0.55},
+                                            kwargs_compare={'facecolor': color2, 'alpha': 0.6})
 
     radar_poly, radar_poly2, vertices1, vertices2 = radar_output
 
@@ -269,7 +270,7 @@ def plotter(df_player_rank1, df_player_vals1, name1, pos, mins1,
         x,y = vertices1[i]
         val = values2[i]
         axs['radar'].annotate(xy = (x,y), text = val, rotation=rot,
-                              bbox=dict(facecolor= '#1A78CF', edgecolor='white', boxstyle='round', alpha=1), 
+                              bbox=dict(facecolor= color1, edgecolor='white', boxstyle='round', alpha=1), 
                               color='white', fontname = 'Sans Serif', fontsize = 15)
 
 
@@ -282,7 +283,7 @@ def plotter(df_player_rank1, df_player_vals1, name1, pos, mins1,
         x,y = vertices2[i]
         val = values4[i]
         axs['radar'].annotate(xy = (x,y), text = val, rotation=rot,
-                              bbox=dict(facecolor= '#D70232', edgecolor='white', boxstyle='round', alpha=1), 
+                              bbox=dict(facecolor= color2, edgecolor='white', boxstyle='round', alpha=1), 
                               color='white', fontname = 'Sans Serif', fontsize = 15)
 
     title1_text = axs['title'].text(0.02, 0.85, name1.upper(), fontsize=25, fontname = 'Sans Serif',
@@ -358,12 +359,17 @@ player2 = st.selectbox(
 df_pos2, df_ranks2 = data_prep_posMins(df, position)
 df_rank2, df_vals2, mins2 = df_player(df_pos2, df_ranks2, player2) 
 
+color1 = st.color_picker('First Player Colour', '#1A78CF')
+color2 = st.color_picker('Second Player Colour', '#D70232')
+
+
 plot = st.button('Plot Comparison')
 
 if plot:
 
     fig = plotter(df_rank1, df_vals1, player1, position, mins1,
-                    df_rank2, df_vals2, player2, mins2) 
+                    df_rank2, df_vals2, player2, mins2,
+                    color1, color2) 
     
     st.write(fig)
 
