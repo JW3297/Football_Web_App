@@ -275,7 +275,7 @@ st.divider()
 st.markdown(
 """
 - Only includes PL Teams for the 23/24 season as of the minute. 
-- Data as of Gameweek 27. 
+- Data as of the latest Gameweek.
 """
 )
 
