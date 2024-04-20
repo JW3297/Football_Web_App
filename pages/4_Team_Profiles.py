@@ -284,7 +284,7 @@ df = pd.read_csv('PL_Teams_2324.csv').iloc[:, 1:]
 teams  = sorted(df['Team'].tolist())
 
 team = st.selectbox(
-    'Player Name', 
+    'Team Name', 
     teams
 )
 
