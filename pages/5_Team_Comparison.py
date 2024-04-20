@@ -211,8 +211,8 @@ def plotter(df_team1, df_team1_ranks, team1,
     title3_text = axs['title'].text(0.86, 0.62, team2.upper(), fontsize=25, fontname = 'Sans Serif',
                                     ha='right', va='center', color='white')
 
-    axs['title'].axhline(y = 0.4, xmin = 0.12, xmax = 0.5, color=color1, lw=3) 
-    axs['title'].axhline(y = 0.4, xmin = 0.5, xmax = 0.88, color=color2, lw=3) 
+    axs['title'].axhline(y = 0.4, xmin = 0.06, xmax = 0.5, color=color1, lw=3) 
+    axs['title'].axhline(y = 0.4, xmin = 0.5, xmax = 0.94, color=color2, lw=3) 
 
     endnote_text = axs['endnote'].text(0.8, 0.5, 'CREATED BY @JoeW_32', fontsize=15,
                                        fontname = 'Sans Serif', ha='left', va='center', color='white')
