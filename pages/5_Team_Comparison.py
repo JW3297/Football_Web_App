@@ -271,8 +271,8 @@ team2 = st.selectbox(
 
 df_team2, df_team2_ranks = df_transform(df_start2, team2)
 
-color1 = st.color_picker('First Player Colour', '#1A78CF')
-color2 = st.color_picker('Second Player Colour', '#D70232')
+color1 = st.color_picker('First Team Colour', '#1A78CF')
+color2 = st.color_picker('Second Team Colour', '#D70232')
 
 
 plot = st.button('Plot Comparison')
