@@ -280,7 +280,7 @@ plot = st.button('Plot Comparison')
 if plot:
 
     fig = plotter(df_team1, df_team1_ranks, team1, 
-                  df_team2, df_team2, team2, 
+                  df_team2, df_team2_ranks, team2, 
                   color1, color2) 
     
     st.write(fig)
