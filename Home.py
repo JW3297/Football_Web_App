@@ -13,6 +13,7 @@ Only developed for the Premier League 23/24 season as of the minute, but plan to
 - **Player Comparison:** Compare a player's percentile rank to another specific player playing in their position. 
 - **Player Similarity:** Use PCA to find the most similar players. 
 - **Team Profiles:** Compare team performance.  
+- **Team Comparison:** Compare team's percentile ranks to another. 
 
 
 Please follow https://twitter.com/JoeW__32__Bot on Twitter.
