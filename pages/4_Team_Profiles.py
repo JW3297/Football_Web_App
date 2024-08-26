@@ -308,7 +308,7 @@ if generate:
     btn = st.download_button(
         label="Download Plot",
         data=b,
-        file_name= team.replace(' ', '') + "Plot.png",
+        file_name= team.replace(' ', '') + season[2:] + "Plot.png",
         mime="image/png"
         )
 

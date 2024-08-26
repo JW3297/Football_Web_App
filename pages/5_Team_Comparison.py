@@ -201,11 +201,21 @@ def plotter(df_team1, df_team1_ranks, team1, team1_season,
         axs['radar'].annotate(xy = (x,y), text = val, rotation=rot,
                               bbox=dict(facecolor= color2, edgecolor='white', boxstyle='round', alpha=1), 
                               color='white', fontname = 'Sans Serif', fontsize = 15)
+        
+    if team1 == 'Nottingham Forest':
+        name1 = 'Forest'
+    else:
+        name1 = team1
 
-    title1_text = axs['title'].text(0.15, 0.62, team1.upper() + ' - ' + team1_season[2:], fontsize=25, fontname = 'Sans Serif',
+    if team2 == 'Nottingham Forest':
+        name2 = 'Forest'
+    else:
+        name2 = team1
+
+    title1_text = axs['title'].text(0.15, 0.62, name1.upper() + ' - ' + team1_season[2:], fontsize=25, fontname = 'Sans Serif',
                                 ha='left', va='center', color='white')
 
-    title3_text = axs['title'].text(0.86, 0.62, team2.upper() + ' - ' + team2_season[2:], fontsize=25, fontname = 'Sans Serif',
+    title3_text = axs['title'].text(0.86, 0.62, name2.upper() + ' - ' + team2_season[2:], fontsize=25, fontname = 'Sans Serif',
                                     ha='right', va='center', color='white')
 
     axs['title'].axhline(y = 0.4, xmin = 0.06, xmax = 0.5, color=color1, lw=3) 
@@ -305,7 +315,7 @@ if plot:
     btn = st.download_button(
         label="Download Plot",
         data=b,
-        file_name= team1.replace(' ', '') + "vs" + team2.replace(' ', '') + "Plot.png",
+        file_name= team1.replace(' ', '') + team1_season[2:] + "vs" + team2.replace(' ', '') + team2_season[2:] + "Plot.png",
         mime="image/png"
     )
 
