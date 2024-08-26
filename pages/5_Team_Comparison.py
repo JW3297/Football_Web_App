@@ -101,9 +101,6 @@ def colorFader(c1,c2,mix=0):
 
 def df_transform(df, team, season):
 
-    for col in ['field_tilt', 'opp_buildup']:
-        df[col] *= 100
-
     df_ranks = df.copy()
     for col in df_ranks.iloc[:, 2:]:
         if col in ['npxg_allowed_op', 'npxg_allowed_sp', 'xt_allowed', 'box_shots_conceded', 'ppda', 
