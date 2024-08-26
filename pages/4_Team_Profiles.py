@@ -279,7 +279,16 @@ st.markdown(
 """
 )
 
-df = pd.read_csv('PL_Teams_2324.csv').iloc[:, 1:]
+df = pd.read_csv('PL_Teams.csv').iloc[:, 1:]
+
+seasons = sorted(list(set(df['Season'])))
+
+season = st.selectbox(
+    'Season', 
+    seasons
+)
+
+df = df[df['Season'] == season].reset_index(drop=True)
 
 teams  = sorted(df['Team'].tolist())
 
