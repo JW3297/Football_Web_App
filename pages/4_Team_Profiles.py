@@ -142,7 +142,7 @@ def df_transform(df, team):
     return df, df_ranks
 
 
-def plotter(df, df_ranks, name):
+def plotter(df, df_ranks, name, season):
 
     fields = df.columns.values.tolist()
     fields = [field.upper() for field in fields]
@@ -215,7 +215,7 @@ def plotter(df, df_ranks, name):
     # add subtitle
     fig.text(
         0.25, 0.9475,
-        "Percentile Rank vs Other PL Teams | Created by ".upper() + '@JoeW__32',
+        "Percentile Rank vs Other PL Teams | " + str(season) + " | Created by ".upper() + '@JoeW__32',
         size=9,
         ha="left",color="white"
     )
@@ -302,7 +302,7 @@ df, df_ranks = df_transform(df, team)
 generate = st.button('Create Plot')
 
 if generate:
-    fig = plotter(df, df_ranks, team)
+    fig = plotter(df, df_ranks, team, season)
     st.write(fig)
 
     b = io.BytesIO()
