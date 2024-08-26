@@ -135,8 +135,8 @@ def df_transform(df, team, season):
     return df, df_ranks
 
 
-def plotter(df_team1, df_team1_ranks, team1, 
-            df_team2, df_team2_ranks, team2,
+def plotter(df_team1, df_team1_ranks, team1, team1_season,
+            df_team2, df_team2_ranks, team2, team2_season,
             color1, color2):
     
     fields = df_team1.columns.tolist()
@@ -202,10 +202,10 @@ def plotter(df_team1, df_team1_ranks, team1,
                               bbox=dict(facecolor= color2, edgecolor='white', boxstyle='round', alpha=1), 
                               color='white', fontname = 'Sans Serif', fontsize = 15)
 
-    title1_text = axs['title'].text(0.15, 0.62, team1.upper(), fontsize=25, fontname = 'Sans Serif',
+    title1_text = axs['title'].text(0.15, 0.62, team1.upper() + ' - ' + team1_season[2:], fontsize=25, fontname = 'Sans Serif',
                                 ha='left', va='center', color='white')
 
-    title3_text = axs['title'].text(0.86, 0.62, team2.upper(), fontsize=25, fontname = 'Sans Serif',
+    title3_text = axs['title'].text(0.86, 0.62, team2.upper() + ' - ' + team2_season[2:], fontsize=25, fontname = 'Sans Serif',
                                     ha='right', va='center', color='white')
 
     axs['title'].axhline(y = 0.4, xmin = 0.06, xmax = 0.5, color=color1, lw=3) 
@@ -293,8 +293,8 @@ plot = st.button('Plot Comparison')
 
 if plot:
 
-    fig = plotter(df_team1, df_team1_ranks, team1, 
-                  df_team2, df_team2_ranks, team2, 
+    fig = plotter(df_team1, df_team1_ranks, team1, team1_season,
+                  df_team2, df_team2_ranks, team2, team2_season,
                   color1, color2) 
     
     st.write(fig)
