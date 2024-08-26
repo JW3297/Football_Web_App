@@ -215,7 +215,7 @@ def plotter(df, df_ranks, name):
     # add subtitle
     fig.text(
         0.25, 0.9475,
-        "Percentile Rank vs Other PL Teams | 2023/24 | Created by ".upper() + '@JoeW__32',
+        "Percentile Rank vs Other PL Teams | Created by ".upper() + '@JoeW__32',
         size=9,
         ha="left",color="white"
     )
