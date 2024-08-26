@@ -210,7 +210,7 @@ def plotter(df_team1, df_team1_ranks, team1, team1_season,
     if team2 == 'Nottingham Forest':
         name2 = 'Forest'
     else:
-        name2 = team1
+        name2 = team2
 
     title1_text = axs['title'].text(0.15, 0.62, name1.upper() + ' - ' + team1_season[2:], fontsize=25, fontname = 'Sans Serif',
                                 ha='left', va='center', color='white')
