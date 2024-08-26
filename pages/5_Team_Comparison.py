@@ -99,7 +99,7 @@ def colorFader(c1,c2,mix=0):
     return mcolors.to_hex((mix)*c1 + (1-mix)*c2)
 
 
-def df_transform(df, team):
+def df_transform(df, team, season):
 
     for col in ['field_tilt', 'opp_buildup']:
         df[col] *= 100
@@ -114,8 +114,8 @@ def df_transform(df, team):
 
         df_ranks[col] = df_ranks[col]/len(df_ranks)
 
-    df = df[df['Team'] == team].reset_index(drop=True).iloc[:, 1:]
-    df_ranks = df_ranks[df_ranks['Team'] == team].reset_index(drop=True).iloc[:, 1:]
+    df = df[(df['Team'] == team) & (df['Season'] == season)].reset_index(drop=True).iloc[:, 1:]
+    df_ranks = df_ranks[(df_ranks['Team'] == team) & (df_ranks['Season'] == season)].reset_index(drop=True).iloc[:, 1:]
     
     order = ['npxg_created_op', 'npxg_created_sp', 'xt_created', 'box_shots', 'box_touches',
              'npxg_allowed_op','npxg_allowed_sp',  'xt_allowed', 'box_shots_conceded', 
@@ -250,26 +250,43 @@ st.markdown(
 """
 )
 
-df_start1 = pd.read_csv('PL_Teams_2324.csv').iloc[:, 1:]
-df_start2 = pd.read_csv('PL_Teams_2324.csv').iloc[:, 1:]
+df = pd.read_csv('PL_Teams.csv').iloc[:, 1:]
 
-teams  = sorted(df_start1['Team'].tolist())
+seasons = sorted(list(set(df['Season'])))
+
+team1_season = st.selectbox(
+    'Team 1 Season', 
+    seasons
+)
+
+df_start1 = df
+df_start2 = df
+
+teams = sorted(df[df['Season'] == team1_season].tolist())
 
 team1 = st.selectbox(
     'Team Name', 
     teams
 )
 
-df_team1, df_team1_ranks = df_transform(df_start1, team1)
+df_team1, df_team1_ranks = df_transform(df_start1, team1, team1_season)
 
-teams_compare = [team for team in teams if team != team1]
+team2_season = st.selectbox(
+    'Team 2 Season', 
+    seasons
+)
+
+if team1_season == team2_season:
+    teams_compare = [team for team in teams if team != team1]
+else:
+    teams_compare = sorted(df[df['Season'] == team2_season].tolist())
 
 team2 = st.selectbox(
     'Team Name', 
     teams_compare
 )
 
-df_team2, df_team2_ranks = df_transform(df_start2, team2)
+df_team2, df_team2_ranks = df_transform(df_start2, team2, team2_season)
 
 color1 = st.color_picker('First Team Colour', '#1A78CF')
 color2 = st.color_picker('Second Team Colour', '#D70232')
