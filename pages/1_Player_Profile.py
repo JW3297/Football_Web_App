@@ -333,8 +333,8 @@ st.divider()
 
 st.markdown(
 """
-- Only includes PL Teams for the 23/24 season as of the minute.
-- Data as of the latest Gameweek.
+- Includes PL Teams for the 22/23 and 23/24 season as of the minute.
+- Will add 24/25 data as the season progresses.
 - Only includes players who have played more than 100 minutes in the respective position. 
 - Goalkeepers not included. 
 """
@@ -342,6 +342,7 @@ st.markdown(
 
 
 df = pd.read_csv('player_db_combined.csv').iloc[:,1:]
+
 df = df[(df['Mins'] >= 90) & 
         (df['Position'] != 'Goalkeeper')].reset_index(drop=True)
 
