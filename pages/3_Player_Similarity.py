@@ -323,9 +323,19 @@ st.markdown(
 )
 
 
-df = pd.read_csv('player_db.csv').iloc[:,1:]
+df = pd.read_csv('player_db_combined.csv').iloc[:,1:]
+
 df = df[(df['Mins'] >= 100) & 
         (df['Position'] != 'Goalkeeper')].reset_index(drop=True)
+
+seasons = sorted(list(set(df['Season'])))
+
+season = st.selectbox(
+    'Player 1 Season', 
+    seasons
+)
+
+df = df[df['Season'] == season].reset_index(drop=True)
 
 players = sorted(list(set(df['playerName'])))
 
