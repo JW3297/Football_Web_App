@@ -286,11 +286,11 @@ def plotter(df_player_rank1, df_player_vals1, name1, pos, mins1, season1,
                               bbox=dict(facecolor= color2, edgecolor='white', boxstyle='round', alpha=1), 
                               color='white', fontname = 'Sans Serif', fontsize = 15)
 
-    title1_text = axs['title'].text(0.02, 0.85, name1.upper() + season1[2:], fontsize=25, fontname = 'Sans Serif',
+    title1_text = axs['title'].text(0.02, 0.85, name1.upper() + ' - ' + season1[2:], fontsize=25, fontname = 'Sans Serif',
                                 ha='left', va='center', color='white')
     title2_text = axs['title'].text(0.02, 0.6, str(mins1) + ' MINS', fontsize=17, fontname = 'Sans Serif',
                                 ha='left', va='center', color='white')
-    title3_text = axs['title'].text(0.98, 0.85, name2.upper() + season2[2:], fontsize=25, fontname = 'Sans Serif',
+    title3_text = axs['title'].text(0.98, 0.85, name2.upper() + ' - ' + season2[2:], fontsize=25, fontname = 'Sans Serif',
                                     ha='right', va='center', color='white')
     title4_text = axs['title'].text(0.98, 0.6, str(mins2) + ' MINS', fontsize=17, fontname = 'Sans Serif',
                                     ha='right', va='center', color='white')
@@ -361,9 +361,13 @@ player2_season = st.selectbox(
     seasons
 )
 
-player_compare = df[(df['Position'] == position) &
-                    (df['playerName'] != player1) &
-                    (df['Season'] == player2_season)]['playerName'].unique().tolist()
+if player2_season == player1_season:
+    player_compare = df[(df['Position'] == position) &
+                        (df['playerName'] != player1) &
+                        (df['Season'] == player2_season)]['playerName'].unique().tolist()
+else:
+    player_compare = df[(df['Position'] == position) & 
+                        (df['Season'] == player2_season)]['playerName'].unique().tolist() 
 
 player2 = st.selectbox(
     'Player To Compare', 
