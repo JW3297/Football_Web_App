@@ -27,7 +27,7 @@ def df_breakdown(df, position, mins=0):
 
     df_ranks = df_pos.copy()
 
-    for col in df_ranks.iloc[:, 4:]:
+    for col in df_ranks.iloc[:, 5:]:
         if col == 'Fouls':
             df_ranks[col] = df_ranks[col].rank(ascending=False)
         else:
