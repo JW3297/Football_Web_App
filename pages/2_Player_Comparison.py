@@ -42,8 +42,9 @@ def data_prep_allMins(df, player, position, season):
     df1 = df[(df['Position'] == position) & 
              (df['playerName'] != player)].reset_index(drop=True)
 
-    df2 = df[df['playerName'] == player].reset_index(drop=True)
-    
+    df2 = df[(df['playerName'] == player) &
+             (df['Season'] == season)].reset_index(drop=True)
+        
     cols = ['Mins', 'Passes Completed', 'Passes Attempted', 'Forward Passes', 'Long Passes', 
             'xT via Pass', 'npxG', 'xA', 'Shots', 'Tackles', 'Interceptions', 'Fouls', 'Aerials', 'Recoveries', 
             'Ball Wins', 'Touches', 'Box Touches', 'Final 1/3 Touches', 'Progressive Passes', 
