@@ -335,7 +335,7 @@ season = st.selectbox(
     seasons
 )
 
-df = df[df['Season'] == season].reset_index(drop=True)
+df = df[df['Season'] == season].iloc[:,1:].reset_index(drop=True)
 
 players = sorted(list(set(df['playerName'])))
 
