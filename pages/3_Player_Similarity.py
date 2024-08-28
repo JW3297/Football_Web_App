@@ -114,7 +114,8 @@ def df_player(df_pos, df_ranks, name):
 
 def plotter(df_player_rank1, df_player_vals1, name1, pos, mins1,
             df_player_rank2, df_player_vals2, name2, mins2,
-            color1, color2):
+            color1, color2,
+            season):
     
     if pos == 'Center Mid':
         cols = [
@@ -294,7 +295,7 @@ def plotter(df_player_rank1, df_player_vals1, name1, pos, mins1,
                                     ha='right', va='center', color='white')
     title4_text = axs['title'].text(0.98, 0.6, str(mins2) + ' MINS', fontsize=17, fontname = 'Sans Serif',
                                     ha='right', va='center', color='white')
-    title5_text = axs['title'].text(0.02, 0.2, 'TEMPLATE: ' + pos, fontsize=17, fontname = 'Sans Serif',
+    title5_text = axs['title'].text(0.02, 0.2, 'TEMPLATE: ' + pos + ' | ' + season, fontsize=17, fontname = 'Sans Serif',
                                     ha='left', va='center', color='white')
     axs['title'].axhline(y = 0.4, xmin = 0.02, xmax = 0.5, color=color1, lw=3) 
     axs['title'].axhline(y = 0.4, xmin = 0.5, xmax = 0.98, color=color2, lw=3) 
@@ -316,8 +317,9 @@ st.divider()
 
 st.markdown(
 """
-- Only includes PL Teams for the 23/24 season as of the minute.
-- Data as of the latest Gameweek.
+- Includes PL Teams for the 22/23 and 23/24 season as of the minute.
+- Will add 24/25 data as the season progresses.
+- Will only compare players in the same given season. 
 - PCA is used to identify similar players using a range of calculated metrics. 
 """
 )
@@ -395,7 +397,8 @@ if generate or st.session_state.generate_state:
 
         fig = plotter(df_rank1, df_vals1, player1, position, mins1,
                         df_rank2, df_vals2, player2, mins2,
-                        color1, color2) 
+                        color1, color2, 
+                        season) 
         
         st.write(fig)
 
