@@ -38,7 +38,7 @@ def data_prep_posMins(df, position):
     return df_pos, df_ranks
 
 
-def data_prep_allMins(df, player, position):
+def data_prep_allMins(df, player, position, season):
     df1 = df[(df['Position'] == position) & 
              (df['playerName'] != player)].reset_index(drop=True)
 
@@ -56,6 +56,8 @@ def data_prep_allMins(df, player, position):
 
     df2['Pass Completion Rate'] = df2['Passes Completed'] / df2['Passes Attempted']
     df2['Position'] = position
+    df2['Season'] = season
+
     order = list(df2.columns[:3]) + [df2.columns[29]] + list(df2.columns[3:7]) + [df2.columns[28]] + list(df2.columns[7:28])
 
     df2 = df2[order]
@@ -349,7 +351,7 @@ position = st.selectbox(
 all_mins = st.checkbox('To include all minutes at above positions')
 
 if all_mins:
-    df_pos1, df_ranks1 = data_prep_allMins(df, player1, position)
+    df_pos1, df_ranks1 = data_prep_allMins(df, player1, position, player1_season)
 
 else:
     df_pos1, df_ranks1 = data_prep_posMins(df, position)
