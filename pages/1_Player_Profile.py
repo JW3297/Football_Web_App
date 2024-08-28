@@ -19,7 +19,7 @@ def df_breakdown(df, position, mins=0):
                 (df['Mins'] >= mins)].reset_index(drop=True)
 
     col_90s = df_pos['Mins']/90
-    for col in df_pos.iloc[:, 4:]:
+    for col in df_pos.iloc[:, 5:]:
         if col == 'Pass Completion Rate':
             continue 
 
@@ -63,7 +63,7 @@ def df_inc_all(df, player, position):
     df_pos = pd.concat([df1, df2], axis=0).reset_index(drop=True)
     
     col_90s = df_pos['Mins']/90
-    for col in df_pos.iloc[:, 4:]:
+    for col in df_pos.iloc[:, 5:]:
         if col == 'Pass Completion Rate':
             continue 
 
@@ -71,7 +71,7 @@ def df_inc_all(df, player, position):
 
     df_ranks = df_pos.copy()
 
-    for col in df_ranks.iloc[:, 4:]:
+    for col in df_ranks.iloc[:, 5:]:
         if col == 'Fouls':
             df_ranks[col] = df_ranks[col].rank(ascending=False)
         else:
@@ -341,9 +341,18 @@ st.markdown(
 )
 
 
-df = pd.read_csv('player_db.csv').iloc[:,1:]
+df = pd.read_csv('player_db_combined.csv').iloc[:,1:]
 df = df[(df['Mins'] >= 90) & 
         (df['Position'] != 'Goalkeeper')].reset_index(drop=True)
+
+seasons = sorted(list(set(df['Season'])))
+
+season = st.selectbox(
+    'Season', 
+    seasons
+)
+
+df = df[df['Season'] == season].reset_index(drop=True)
 
 players = sorted(list(set(df['playerName'])))
 
