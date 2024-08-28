@@ -102,7 +102,7 @@ def colorFader(c1,c2,mix=0):
     return mcolors.to_hex((mix)*c1 + (1-mix)*c2)
 
 @st.cache_resource
-def plotter(df_player_rank, df_player_vals, name, pos, mins):
+def plotter(df_player_rank, df_player_vals, name, pos, mins, season):
     
     if pos == 'Center Mid':
         cols = [
@@ -287,7 +287,7 @@ def plotter(df_player_rank, df_player_vals, name, pos, mins):
     # add subtitle
     fig.text(
         0.1, 0.9175,
-        "Percentile Rank vs Other PL Players | 2023/24 | Created by ".upper() + '@JoeW__32',
+        "Percentile Rank vs Other PL Players | " + season + " | Created by ".upper() + '@JoeW__32',
         size=9,
         ha="left",color="white"
     )
@@ -382,7 +382,7 @@ df_player_rank, df_player_vals, mins =  df_player(df_pos, df_ranks, player)
 generate = st.button('Create Plot')
 
 if generate:
-    fig = plotter(df_player_rank, df_player_vals, player, position, mins)
+    fig = plotter(df_player_rank, df_player_vals, player, position, mins, season)
     st.write(fig)
 
     b = io.BytesIO()
@@ -391,7 +391,7 @@ if generate:
     btn = st.download_button(
         label="Download Plot",
         data=b,
-        file_name= player.replace(' ', '') + "Plot.png",
+        file_name= player.replace(' ', '') +  "Plot.png",
         mime="image/png"
         )
 
