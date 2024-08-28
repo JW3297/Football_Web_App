@@ -331,7 +331,7 @@ df = df[(df['Mins'] >= 100) &
 seasons = sorted(list(set(df['Season'])))
 
 season = st.selectbox(
-    'Player 1 Season', 
+    'Season', 
     seasons
 )
 
