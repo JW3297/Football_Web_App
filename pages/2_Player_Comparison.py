@@ -19,7 +19,7 @@ def data_prep_posMins(df, position):
     df_pos = df[(df['Position'] == position)].reset_index(drop=True)
 
     col_90s = df_pos['Mins']/90
-    for col in df_pos.iloc[:, 4:]:
+    for col in df_pos.iloc[:, 5:]:
         if col == 'Pass Completion Rate':
             continue 
 
@@ -27,7 +27,7 @@ def data_prep_posMins(df, position):
 
     df_ranks = df_pos.copy()
 
-    for col in df_ranks.iloc[:, 4:]:
+    for col in df_ranks.iloc[:, 5:]:
         if col == 'Fouls':
             df_ranks[col] = df_ranks[col].rank(ascending=False)
         else:
@@ -56,14 +56,14 @@ def data_prep_allMins(df, player, position):
 
     df2['Pass Completion Rate'] = df2['Passes Completed'] / df2['Passes Attempted']
     df2['Position'] = position
-    order = list(df2.columns[:2]) + [df2.columns[28]] + list(df2.columns[2:6]) + [df2.columns[27]] + list(df2.columns[6:27])
+    order = list(df2.columns[:3]) + [df2.columns[29]] + list(df2.columns[3:7]) + [df2.columns[28]] + list(df2.columns[7:28])
 
     df2 = df2[order]
     
     df_pos = pd.concat([df1, df2], axis=0).reset_index(drop=True)
     
     col_90s = df_pos['Mins']/90
-    for col in df_pos.iloc[:, 4:]:
+    for col in df_pos.iloc[:, 5:]:
         if col == 'Pass Completion Rate':
             continue 
 
@@ -71,7 +71,7 @@ def data_prep_allMins(df, player, position):
 
     df_ranks = df_pos.copy()
 
-    for col in df_ranks.iloc[:, 4:]:
+    for col in df_ranks.iloc[:, 5:]:
         if col == 'Fouls':
             df_ranks[col] = df_ranks[col].rank(ascending=False)
         else:
@@ -103,17 +103,17 @@ def playerSimilaritySearch(df, name):
 
     return df.head(10)
 
-def df_player(df_pos, df_ranks, name):
-    df_player_rank = df_ranks[df_ranks['playerName'] == name].reset_index(drop=True)
-    df_player_vals = df_pos[df_pos['playerName'] == name].reset_index(drop=True)
+def df_player(df_pos, df_ranks, name, season):
+    df_player_rank = df_ranks[(df_ranks['playerName'] == name) & (df_ranks['Season'] == season)].reset_index(drop=True)
+    df_player_vals = df_pos[(df_pos['playerName'] == name) & (df_pos['Season'] == season)].reset_index(drop=True)
     
     df_player_vals['Pass Completion Rate'] *= 100
     mins = df_player_rank['Mins'][0]
     
     return df_player_rank, df_player_vals, mins
 
-def plotter(df_player_rank1, df_player_vals1, name1, pos, mins1,
-            df_player_rank2, df_player_vals2, name2, mins2,
+def plotter(df_player_rank1, df_player_vals1, name1, pos, mins1, season1,
+            df_player_rank2, df_player_vals2, name2, mins2, season2, 
             color1, color2):
     
     if pos == 'Center Mid':
@@ -286,11 +286,11 @@ def plotter(df_player_rank1, df_player_vals1, name1, pos, mins1,
                               bbox=dict(facecolor= color2, edgecolor='white', boxstyle='round', alpha=1), 
                               color='white', fontname = 'Sans Serif', fontsize = 15)
 
-    title1_text = axs['title'].text(0.02, 0.85, name1.upper(), fontsize=25, fontname = 'Sans Serif',
+    title1_text = axs['title'].text(0.02, 0.85, name1.upper() + season1[2:], fontsize=25, fontname = 'Sans Serif',
                                 ha='left', va='center', color='white')
     title2_text = axs['title'].text(0.02, 0.6, str(mins1) + ' MINS', fontsize=17, fontname = 'Sans Serif',
                                 ha='left', va='center', color='white')
-    title3_text = axs['title'].text(0.98, 0.85, name2.upper(), fontsize=25, fontname = 'Sans Serif',
+    title3_text = axs['title'].text(0.98, 0.85, name2.upper() + season2[2:], fontsize=25, fontname = 'Sans Serif',
                                     ha='right', va='center', color='white')
     title4_text = axs['title'].text(0.98, 0.6, str(mins2) + ' MINS', fontsize=17, fontname = 'Sans Serif',
                                     ha='right', va='center', color='white')
@@ -320,18 +320,26 @@ st.markdown(
 )
 
 
-df = pd.read_csv('player_db.csv').iloc[:,1:]
+df = pd.read_csv('player_db_combined.csv').iloc[:,1:]
+
 df = df[(df['Mins'] >= 100) & 
         (df['Position'] != 'Goalkeeper')].reset_index(drop=True)
 
-players = sorted(list(set(df['playerName'])))
+seasons = sorted(list(set(df['Season'])))
+
+player1_season = st.selectbox(
+    'Player 1 Season', 
+    seasons
+)
+
+players = sorted(list(set(df[df['Season'] == player1_season]['playerName'])))
 
 player1 = st.selectbox(
     'Player Name', 
     players
 )
 
-positions = list(df[df['playerName'] == player1]['Position'])
+positions = list(df[(df['playerName'] == player1) & (df['Season'] == player1_season)]['Position'])
 
 position = st.selectbox(
     'Position', 
@@ -346,10 +354,16 @@ if all_mins:
 else:
     df_pos1, df_ranks1 = data_prep_posMins(df, position)
 
-df_rank1, df_vals1, mins1 = df_player(df_pos1, df_ranks1, player1)
+df_rank1, df_vals1, mins1 = df_player(df_pos1, df_ranks1, player1, player1_season)
+
+player2_season = st.selectbox(
+    'Player 2 Season', 
+    seasons
+)
 
 player_compare = df[(df['Position'] == position) &
-                    (df['playerName'] != player1)]['playerName'].unique().tolist()
+                    (df['playerName'] != player1) &
+                    (df['Season'] == player2_season)]['playerName'].unique().tolist()
 
 player2 = st.selectbox(
     'Player To Compare', 
@@ -357,7 +371,7 @@ player2 = st.selectbox(
 )
 
 df_pos2, df_ranks2 = data_prep_posMins(df, position)
-df_rank2, df_vals2, mins2 = df_player(df_pos2, df_ranks2, player2) 
+df_rank2, df_vals2, mins2 = df_player(df_pos2, df_ranks2, player2, player2_season) 
 
 color1 = st.color_picker('First Player Colour', '#1A78CF')
 color2 = st.color_picker('Second Player Colour', '#D70232')
@@ -367,8 +381,8 @@ plot = st.button('Plot Comparison')
 
 if plot:
 
-    fig = plotter(df_rank1, df_vals1, player1, position, mins1,
-                    df_rank2, df_vals2, player2, mins2,
+    fig = plotter(df_rank1, df_vals1, player1, position, mins1, player1_season,
+                    df_rank2, df_vals2, player2, mins2, player2_season,
                     color1, color2) 
     
     st.write(fig)
