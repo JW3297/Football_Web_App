@@ -38,7 +38,8 @@ home_colors = {
     'Wolves' : '#DA9D0A',    
     "Burnley": "#811331", 
     "Sheff Utd": "#E63636", 
-    "Luton": "#FB6B07"
+    "Luton": "#FB6B07", 
+    "Ipswich" : '#2D5DE7'
 }
 
 logos = {
@@ -64,7 +65,8 @@ logos = {
     'Wolves' : 8602,
     "Burnley": 8191, 
     "Sheff Utd": 8657, 
-    "Luton": 8346
+    "Luton": 8346,
+    "Ipswich" : 9902
 }
 
 ids = {
@@ -90,7 +92,8 @@ ids = {
     'Wolves' : 161,
     'Burnley' : 184, 
     'Sheff Utd' : 163, 
-    'Luton' : 95
+    'Luton' : 95, 
+    "Ipswich" : 165
 }
 
 # Color Map
