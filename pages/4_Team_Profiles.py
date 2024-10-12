@@ -290,7 +290,9 @@ season = st.selectbox(
 
 df = df[df['Season'] == season].reset_index(drop=True)
 
-teams  = sorted(df['Team'].tolist())
+teams  = sorted(list(set(df['Team'])))
+
+
 
 team = st.selectbox(
     'Team Name', 

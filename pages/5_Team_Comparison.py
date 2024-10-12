@@ -269,7 +269,8 @@ team1_season = st.selectbox(
 df_start1 = df
 df_start2 = df
 
-teams = sorted(df[df['Season'] == team1_season]['Team'].tolist())
+teams = sorted(list(set(df[df['Season'] == team1_season]['Team'])))
+
 
 team1 = st.selectbox(
     'Team Name', 
@@ -286,7 +287,7 @@ team2_season = st.selectbox(
 if team1_season == team2_season:
     teams_compare = [team for team in teams if team != team1]
 else:
-    teams_compare = sorted(df[df['Season'] == team2_season]['Team'].tolist())
+    teams_compare = sorted(list(set(df[df['Season'] == team2_season]['Team'])))
 
 team2 = st.selectbox(
     'Team Name', 
